@@ -1,7 +1,7 @@
 #define CATCH_CONFIG_MAIN
 
 #include "catch.hpp"
-#include "classes/Collection.h"
+#include "classes/Search.h"
 
 
 TEST_CASE("Parse word: change accents, remove non allfa numeric and convert to lower case") {
@@ -39,4 +39,13 @@ TEST_CASE("Check if doc1, doc2 and doc3 load on collection") {
     REQUIRE(collection.getDocuments().front().getName() == "doc3");
     REQUIRE(collection.getDocuments().at(1).getName() == "doc1");
     REQUIRE(collection.getDocuments().back().getName() == "doc2");
+}
+
+TEST_CASE("Check if terms has populed") {
+    Collection collection("../docs");
+    Search search("ÇásÃ tOdoS apàrtamêntõ", collection);
+
+    REQUIRE(search.getTerms().at(0).getText() == "casa");
+    REQUIRE(search.getTerms().at(1).getText() == "todos");
+    REQUIRE(search.getTerms().at(2).getText() == "apartamento");
 }
