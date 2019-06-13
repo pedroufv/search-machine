@@ -1,6 +1,9 @@
 #ifndef SEARCH_MACHINE_COLLECTION_H
 #define SEARCH_MACHINE_COLLECTION_H
 
+
+#include <dirent.h>
+#include <cstring>
 #include "Document.h"
 
 class Collection {
