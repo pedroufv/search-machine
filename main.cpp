@@ -58,3 +58,18 @@ TEST_CASE("Check if found terms in collection") {
     REQUIRE(search.getDocumentsFound().at(1).getName() == "doc1");
     REQUIRE(search.getWordImportance().find("apartamento")->second == log((float) 3/2));
 }
+
+
+TEST_CASE("Check coordinate") {
+    Collection collection("../docs");
+    Search search("casa", collection);
+
+    for(const auto &point : search.getCoordinate()) {
+
+        for (const auto &docWord : point.first) {
+            cout << docWord.first << " - " << docWord.second;
+        }
+
+        cout << " - value: " << point.second << endl;
+    }
+}

@@ -6,6 +6,7 @@
 Search::Search(const string &expression, Collection collection) : expression(expression), collection(collection) {
     loadTerms();
     loadWordImportance();
+    loadCoordinate();
 }
 
 const string &Search::getExpression() const {
@@ -48,6 +49,14 @@ void Search::setWordImportance(const map<string, float> &wordImportance) {
     Search::wordImportance = wordImportance;
 }
 
+const map<map<string, string>, float> &Search::getCoordinate() const {
+    return coordinate;
+}
+
+void Search::setCoordinate(const map<map<string, string>, float> &coordinate) {
+    Search::coordinate = coordinate;
+}
+
 void Search::loadTerms() {
     string streamTerm;
     stringstream strStream(expression);
@@ -88,5 +97,26 @@ void Search::loadWordImportance() {
         }
 
         wordImportance.insert(pair<string, float>(word.getText(), log((float) collection.getDocuments().size() / found)));
+    }
+}
+
+
+void Search::loadCoordinate() {
+
+    // calculete frequency x wordImportance
+    for(const auto &document : collection.getDocuments()){
+
+        for(const auto &term : terms){
+            if (find(document.getWords().begin(), document.getWords().end(), term) == document.getWords().end())
+                continue;
+
+            map<string, string> coord;
+            coord.insert(pair<string, string>(document.getName(), term.getText()));
+            if(coordinate.find(coord) == coordinate.end()) {
+                coordinate.insert(pair<map<string, string>, float>(coord, 0));
+            }
+
+            coordinate.find(coord)->second = find(documentsFound.begin(), documentsFound.end(), document).base()->getWordFrquency().find(term.getText())->second * wordImportance.find(term.getText())->second;
+        }
     }
 }

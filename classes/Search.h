@@ -11,10 +11,12 @@ private:
     Collection collection;
     vector<Document> documentsFound;
     map<string, float> wordImportance;
+    map<map<string, string>, float> coordinate;
 
     void loadTerms();
     void loadDocumentsFound(Word word);
     void loadWordImportance();
+    void loadCoordinate();
 
 
 public:
@@ -39,6 +41,10 @@ public:
     const map<string, float> &getWordImportance() const;
 
     void setWordImportance(const map<string, float> &wordImportance);
+
+    const map<map<string, string>, float> &getCoordinate() const;
+
+    void setCoordinate(const map<map<string, string>, float> &coordinate);
 
 };
 
