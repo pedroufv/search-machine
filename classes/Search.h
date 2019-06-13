@@ -10,9 +10,11 @@ private:
     vector<Word> terms;
     Collection collection;
     vector<Document> documentsFound;
+    map<string, int> wordImportance;
 
     void loadTerms();
     void loadDocumentsFound(Word word);
+    void addWordImportance(Word word);
 
 
 public:
@@ -33,6 +35,10 @@ public:
     const vector<Document> &getDocumentsFound() const;
 
     void setDocumentsFound(const vector<Document> &documentsFound);
+
+    const map<string, int> &getWordImportance() const;
+
+    void setWordImportance(const map<string, int> &wordImportance);
 
 };
 

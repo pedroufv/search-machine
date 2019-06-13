@@ -56,4 +56,5 @@ TEST_CASE("Check if found terms in collection") {
 
     REQUIRE(search.getDocumentsFound().at(0).getName() == "doc3");
     REQUIRE(search.getDocumentsFound().at(1).getName() == "doc1");
+    REQUIRE(search.getWordImportance().find("apartamento")->second == 1);
 }

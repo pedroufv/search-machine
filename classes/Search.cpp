@@ -38,6 +38,14 @@ void Search::setDocumentsFound(const vector<Document> &documentsFound) {
     Search::documentsFound = documentsFound;
 }
 
+const map<string, int> &Search::getWordImportance() const {
+    return wordImportance;
+}
+
+void Search::setWordImportance(const map<string, int> &wordImportance) {
+    Search::wordImportance = wordImportance;
+}
+
 void Search::loadTerms() {
     string streamTerm;
     stringstream strStream(expression);
@@ -49,6 +57,8 @@ void Search::loadTerms() {
         terms.emplace_back(word);
 
         loadDocumentsFound(word);
+
+        addWordImportance(word);
     }
 
 }
@@ -61,5 +71,18 @@ void Search::loadDocumentsFound(Word word) {
 
         if (find(documentsFound.begin(), documentsFound.end(), document) == documentsFound.end())
             documentsFound.emplace_back(document);
+    }
+}
+
+void Search::addWordImportance(Word word) {
+
+    for(const auto &document : collection.getDocuments()){
+        if (find(document.getWords().begin(), document.getWords().end(), word) == document.getWords().end())
+            continue;
+
+        if (wordImportance.find(word.getText()) == wordImportance.end())
+            wordImportance.insert(pair<string, int>(word.getText(), 0));
+
+        wordImportance.find(word.getText())->second++;
     }
 }
