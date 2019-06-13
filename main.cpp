@@ -12,7 +12,7 @@ TEST_CASE("Parse word: change accents, remove non allfa numeric and convert to l
 
 TEST_CASE("Handling file") {
 
-    mkdir("docs", 0777);
+    mkdir("../docs", 0777);
 
     ofstream ofile;
     string line;
