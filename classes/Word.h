@@ -1,6 +1,7 @@
 #ifndef SEARCH_MACHINE_WORD_H
 #define SEARCH_MACHINE_WORD_H
 
+#include <bits/stdc++.h>
 #include <iostream>
 using namespace std;
 
@@ -16,6 +17,8 @@ public:
     void setText(const string &text);
 
     void toLower();
+
+    void replaceAccents();
 
     void removeNonAlfa();
 
