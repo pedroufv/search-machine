@@ -49,3 +49,11 @@ TEST_CASE("Check if terms has populed") {
     REQUIRE(search.getTerms().at(1).getText() == "todos");
     REQUIRE(search.getTerms().at(2).getText() == "apartamento");
 }
+
+TEST_CASE("Check if found terms in collection") {
+    Collection collection("../docs");
+    Search search("apàrtamêntõ", collection);
+
+    REQUIRE(search.getDocumentsFound().at(0).getName() == "doc3");
+    REQUIRE(search.getDocumentsFound().at(1).getName() == "doc1");
+}

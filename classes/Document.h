@@ -36,6 +36,8 @@ public:
     const map<string, int> &getWordFrquency() const;
 
     void setWordFrquency(const map<string, int> &wordFrquency);
+
+    bool operator==(const Document &rhs) const;
 };
 
 

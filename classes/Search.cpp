@@ -1,17 +1,9 @@
 #include <sstream>
+#include <algorithm>
 #include "Search.h"
 
 Search::Search(const string &expression, Collection collection) : expression(expression), collection(collection) {
-    string streamTerm;
-    stringstream strStream(expression);
-    Word word;
-
-    while (strStream >> streamTerm) {
-        word.parse(streamTerm);
-
-        terms.emplace_back(word);
-    }
-
+    loadTerms();
 }
 
 const string &Search::getExpression() const {
@@ -36,4 +28,38 @@ const Collection &Search::getCollection() const {
 
 void Search::setCollection(const Collection &collection) {
     Search::collection = collection;
+}
+
+const vector<Document> &Search::getDocumentsFound() const {
+    return documentsFound;
+}
+
+void Search::setDocumentsFound(const vector<Document> &documentsFound) {
+    Search::documentsFound = documentsFound;
+}
+
+void Search::loadTerms() {
+    string streamTerm;
+    stringstream strStream(expression);
+    Word word;
+
+    while (strStream >> streamTerm) {
+        word.parse(streamTerm);
+
+        terms.emplace_back(word);
+
+        loadDocumentsFound(word);
+    }
+
+}
+
+void Search::loadDocumentsFound(Word word) {
+
+    for(const auto &document : collection.getDocuments()){
+        if (find(document.getWords().begin(), document.getWords().end(), word) == document.getWords().end())
+            continue;
+
+        if (find(documentsFound.begin(), documentsFound.end(), document) == documentsFound.end())
+            documentsFound.emplace_back(document);
+    }
 }

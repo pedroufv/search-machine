@@ -23,6 +23,7 @@ public:
 
     void parse(string text);
 
+    bool operator==(const Word &rhs) const;
 };
 
 

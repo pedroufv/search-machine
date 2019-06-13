@@ -66,4 +66,8 @@ void Document::loadWordFrequency(ifstream &file) {
     }
 }
 
+bool Document::operator==(const Document &rhs) const {
+    return this->getName() == rhs.getName();
+}
+
 

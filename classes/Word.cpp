@@ -88,3 +88,7 @@ void Word::parse(string text) {
     toLower();
     removeNonAlfa();
 }
+
+bool Word::operator==(const Word &rhs) const {
+    return this->getText() == rhs.getText();
+}
