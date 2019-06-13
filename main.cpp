@@ -19,3 +19,9 @@ TEST_CASE("Check if load word frequency on construct") {
     REQUIRE(document.getWordFrquency().find("ninguem")->second == 2);
     REQUIRE(document.getWordFrquency().find("porem")->second == 1);
 }
+
+TEST_CASE("Check if last word push in the end") {
+    Document document("doc1", "../docs");
+
+    REQUIRE(document.getWords().back().getText() == "apartamento");
+}

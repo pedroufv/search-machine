@@ -16,6 +16,10 @@ private:
     vector<Word> words;
     map<string, int> wordFrquency;
 
+    void read(string fullPath);
+
+    void loadWordFrequency(ifstream &file);
+
 public:
 
     Document(const string &name, const string &path);
@@ -35,9 +39,6 @@ public:
     const map<string, int> &getWordFrquency() const;
 
     void setWordFrquency(const map<string, int> &wordFrquency);
-
-    void loadWordFrequency(string fullPath);
-
 };
 
 

@@ -3,7 +3,7 @@
 
 Document::Document(const string &name, const string &path = "") : name(name), path(path) {
 
-    loadWordFrequency(path + "/" + name);
+    read(path + "/" + name);
 
 }
 
@@ -39,23 +39,31 @@ void Document::setWordFrquency(const map<string, int> &wordFrquency) {
     Document::wordFrquency = wordFrquency;
 }
 
-void Document::loadWordFrequency(string fullPath) {
-    ifstream file(fullPath);
+void Document::read(string fullPath) {
+    ifstream file(fullPath.c_str());
 
     if (file.fail())
         return;
 
+    if(file.is_open())
+        loadWordFrequency(file);
+
+    file.close();
+}
+
+void Document::loadWordFrequency(ifstream &file) {
     string text;
     Word word;
 
     while (file >> text) {
         word.parse(text);
+        words.emplace_back(word);
 
         if(wordFrquency.find(word.getText()) == wordFrquency.end()) {
             wordFrquency.insert(pair<string, int>(word.getText(), 0));
         }
         wordFrquency.find(word.getText())->second++;
     }
-
-    file.close();
 }
+
+
