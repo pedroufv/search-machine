@@ -1,8 +1,6 @@
 #define CATCH_CONFIG_MAIN
 
 #include "catch.hpp"
-#include "classes/Word.h"
-#include "classes/Document.h"
 #include "classes/Collection.h"
 
 

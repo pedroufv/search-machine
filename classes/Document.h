@@ -2,12 +2,9 @@
 #define SEARCH_MACHINE_DOCUMENT_H
 
 #include <fstream>
-#include <iostream>
 #include <vector>
 #include <map>
 #include "Word.h"
-
-using namespace std;
 
 class Document {
 

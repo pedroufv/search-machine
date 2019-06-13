@@ -1,14 +1,7 @@
 #ifndef SEARCH_MACHINE_COLLECTION_H
 #define SEARCH_MACHINE_COLLECTION_H
 
-#include <iostream>
-#include <vector>
-#include <map>
-#include <dirent.h>
-#include <cstring>
 #include "Document.h"
-
-using namespace std;
 
 class Collection {
 
