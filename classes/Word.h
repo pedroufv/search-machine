@@ -1,7 +1,6 @@
 #ifndef SEARCH_MACHINE_WORD_H
 #define SEARCH_MACHINE_WORD_H
 
-#include <bits/stdc++.h>
 #include <iostream>
 using namespace std;
 
