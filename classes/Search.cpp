@@ -76,10 +76,17 @@ void Search::loadDocumentsFound(Word word) {
 
 void Search::loadWordImportance() {
 
-    for(const auto &word : terms){
-        if (wordImportance.find(word.getText()) == wordImportance.end())
-            wordImportance.insert(pair<string, float>(word.getText(), 0));
+    int found = 0;
 
-        wordImportance.find(word.getText())->second = log(collection.getDocuments().size() / documentsFound.size());
+    for(const auto &word : terms){
+
+        for(const auto &document : collection.getDocuments()){
+            if (find(document.getWords().begin(), document.getWords().end(), word) == document.getWords().end())
+                continue;
+
+            found++;
+        }
+
+        wordImportance.insert(pair<string, float>(word.getText(), log((float) collection.getDocuments().size() / found)));
     }
 }
